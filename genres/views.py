@@ -1,4 +1,5 @@
 import json
+from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
@@ -10,6 +11,7 @@ from genres.serializers import GenreSerializer
 
 
 class GenreCreateListView(generics.ListCreateAPIView):  # Nova view Class based view (Lista e Cria)
+    permission_classes = (IsAuthenticated,)
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
@@ -32,6 +34,7 @@ def genre_create_list_view(request):
 
 
 class GenreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView): #nova view Class based view (Detalha, Edita, Deleta)
+    permission_classes = (IsAuthenticated,)
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 

@@ -6,12 +6,15 @@ from django.shortcuts import get_object_or_404
 from genres.models import Genre
 from rest_framework import generics
 from genres.serializers import GenreSerializer
+from genres.permissions import GenrePermissionClass
+from app.permissions import GlobalDefaultPermission
+
 
 
 
 
 class GenreCreateListView(generics.ListCreateAPIView):  # Nova view Class based view (Lista e Cria)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
@@ -34,7 +37,7 @@ def genre_create_list_view(request):
 
 
 class GenreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView): #nova view Class based view (Detalha, Edita, Deleta)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
